@@ -1,0 +1,31 @@
+# List the start up tasks. Learn more: https://www.gitpod.io/docs/configure/workspaces/tasks
+tasks:
+  - name: 'Install MongoDB server'
+    init: docker-compose up -d
+    command: echo ">> MongoDB installation done. You can exit this terminal."
+
+  - name: 'Initialize frontend server'
+    init: cd client && npm i
+    command: echo ">> Run `npm run start:dev` for development mode -OR- `npm run build:beta` for production mode"
+
+  - name: 'Initialize backend server'
+    init: cd server && npm i
+    command: echo ">> Run `npm run dev` for development mode -OR- `npm start` for production mode"
+
+# List the ports to expose. Learn more: https://www.gitpod.io/docs/configure/workspaces/ports
+ports:
+  - name: Frontend server
+    description: Client application
+    port: 3000
+    onOpen: notify
+
+  - name: Backend server
+    description: Server application
+    port: 5000
+    onOpen: notify
+
+  - name: MongoDB Database
+    description: E-commerce App Database
+    port: 27017
+    onOpen: ignore
+# Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
